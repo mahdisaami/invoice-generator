@@ -1,4 +1,4 @@
-# Flask Invoice Generator
+# 🧾 Flask Invoice Generator
 
 A modern **Invoice Management Web Application** built with **Flask**, **WTForms**, and **Tailwind CSS**.  
 Easily create, view, and print invoices.
