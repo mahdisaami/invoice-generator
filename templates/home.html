@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex flex-col items-center justify-center font-sans">
+
+  <div class="bg-gray-800/60 backdrop-blur-md shadow-lg rounded-2xl p-10 w-full max-w-md text-center border border-gray-700">
+    <h1 class="text-3xl font-semibold mb-4">Welcome, <span class="text-indigo-400">{{ g.user.email }}</span></h1>
+    <p class="text-gray-400 mb-8">Glad to see you back. Choose what you want to do today 👇</p>
+
+    <div class="space-y-3">
+      <a href="{{ url_for('main_pages.invoice_create') }}"
+         class="block w-full py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 transition font-medium">
+         ➕ Create Invoice
+      </a>
+      <a href="{{ url_for('main_pages.invoice_list') }}"
+         class="block w-full py-3 rounded-lg bg-blue-500 hover:bg-blue-600 transition font-medium">
+         📄 View Invoices
+      </a>
+      <a href="{{ url_for('main_pages.logout') }}"
+         class="block w-full py-3 rounded-lg bg-red-500 hover:bg-red-600 transition font-medium">
+         🚪 Logout
+      </a>
+    </div>
+  </div>
+
+<footer class="mt-8 text-gray-500 text-sm">
+  © 2025 Invoice System. All rights reserved.
+</footer>
+
+
+
+</body>
+</html>

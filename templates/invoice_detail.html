@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice Detail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .bg-gray-800/70, .backdrop-blur-md, .shadow-xl, .border {
+        background: white !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+
+      a {
+        color: black !important;
+        text-decoration: none !important;
+      }
+
+      table th, table td {
+        border: 1px solid black !important;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100 font-sans p-8">
+
+  <div class="max-w-4xl mx-auto bg-gray-800/70 backdrop-blur-md rounded-2xl shadow-xl border border-gray-700 p-8 space-y-6">
+    <div class="flex items-center justify-between">
+      <h1 class="text-3xl font-bold text-indigo-400">
+        🧾 Invoice: {{ invoice.title }} ({{ invoice.number }})
+      </h1>
+      <div class="space-x-2 no-print">
+        <a href="{{ url_for('main_pages.invoice_list') }}"
+           class="px-4 py-2 bg-green-500 hover:bg-green-600 rounded-lg font-semibold transition">
+           🔙 Back to List
+        </a>
+        <button onclick="window.print()"
+                class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 rounded-lg font-semibold text-white">
+          🖨 Print Invoice
+        </button>
+      </div>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <p><span class="font-semibold text-gray-300">Customer:</span> {{ invoice.customer }}</p>
+      <p><span class="font-semibold text-gray-300">Date:</span> {{ invoice.date or invoice.created_data }}</p>
+      <p class="md:col-span-2"><span class="font-semibold text-gray-300">Description:</span> {{ invoice.description }}</p>
+    </div>
+
+
+    <div class="overflow-x-auto mt-6">
+      <table class="min-w-full divide-y divide-gray-700 border border-gray-700">
+        <thead class="bg-gray-700">
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">#</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Description</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Quantity</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Fee</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Discount</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Total Price</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-700">
+          {% for item in invoice.entities %}
+          <tr class="hover:bg-gray-700/40 transition">
+            <td class="px-4 py-2">{{ loop.index }}</td>
+            <td class="px-4 py-2">{{ item.description }}</td>
+            <td class="px-4 py-2">{{ item.qty }}</td>
+            <td class="px-4 py-2">{{ item.fee }}</td>
+            <td class="px-4 py-2">{{ item.discount or 0 }}</td>
+            <td class="px-4 py-2">{{ item.total_price - (item.discount or 0) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="mt-6 bg-gray-700/50 rounded-lg p-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-100">
+      <div><span class="font-semibold text-gray-300">Total Price:</span> {{ invoice.total_price }}</div>
+      <div><span class="font-semibold text-gray-300">Total Discount:</span> {{ invoice.total_discount }}</div>
+      <div><span class="font-semibold text-gray-300">Payable Price:</span> {{ invoice.payable_price }}</div>
+    </div>
+  </div>
+
+  <footer class="mt-10 text-center text-gray-500 text-sm no-print">
+    © 2025 Invoice System
+  </footer>
+
+</body>
+</html>

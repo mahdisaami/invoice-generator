@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
+    <div class="w-full max-w-md bg-gray-800/60 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-gray-700">
+        <h1 class="text-3xl font-bold mb-6 text-center">Welcome Back 👋</h1>
+
+        <form method="POST" class="space-y-5">
+            {{ form.hidden_tag() }}
+
+            <div>
+                {{ form.email.label(class_='block mb-2 text-sm font-medium text-gray-300') }}
+                {{ form.email(class_='w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent') }}
+            </div>
+
+            <div>
+                {{ form.password.label(class_='block mb-2 text-sm font-medium text-gray-300') }}
+                {{ form.password(class_='w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent') }}
+            </div>
+
+            <div>
+                {{ form.submit(class_='w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition duration-200') }}
+            </div>
+        </form>
+
+<!--        {% with messages = get_flashed_messages(with_categories=true) %}-->
+<!--          {% if messages %}-->
+<!--            <div class="mt-6">-->
+<!--              {% for category, message in messages %}-->
+<!--                <p class="text-sm text-center text-{{ 'green-400' if category == 'success' else 'red-400' }}">{{ message }}</p>-->
+<!--              {% endfor %}-->
+<!--            </div>-->
+<!--          {% endif %}-->
+<!--        {% endwith %}-->
+
+        <p class="text-center text-sm text-gray-400 mt-6">
+            Don’t have an account?
+            <a href="{{ url_for('main_pages.register') }}" class="text-blue-400 hover:underline">Sign up</a>
+        </p>
+    </div>
+</body>
+</html>
+    

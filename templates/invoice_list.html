@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100 font-sans p-8">
+
+  <div class="max-w-6xl mx-auto bg-gray-800/70 backdrop-blur-md rounded-2xl shadow-xl border border-gray-700 p-6">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-3xl font-bold text-indigo-400">🧾 Invoices</h1>
+      <a href="{{ url_for('main_pages.invoice_create') }}"
+         class="px-4 py-2 bg-green-500 hover:bg-green-600 rounded-lg font-semibold transition">
+         ➕ Create New Invoice
+      </a>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-700">
+        <thead class="bg-gray-700">
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">#</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Number</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Title</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Customer</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Total Price</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Payable</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-300">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-700">
+          {% for invoice in invoices %}
+          <tr class="hover:bg-gray-700/40 transition">
+            <td class="px-4 py-2">{{ loop.index }}</td>
+            <td class="px-4 py-2">{{ invoice.number }}</td>
+            <td class="px-4 py-2">{{ invoice.title }}</td>
+            <td class="px-4 py-2">{{ invoice.customer }}</td>
+            <td class="px-4 py-2">{{ invoice.total_price }}</td>
+            <td class="px-4 py-2">{{ invoice.payable_price }}</td>
+            <td class="px-4 py-2 space-x-2">
+              <a href="{{ url_for('main_pages.invoice_detail', id=invoice.id) }}"
+                 class="px-2 py-1 bg-blue-500 hover:bg-blue-600 rounded-lg text-white text-sm transition">View</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="mt-10 text-center text-gray-500 text-sm">
+    © 2025 Invoice System
+  </footer>
+
+</body>
+</html>

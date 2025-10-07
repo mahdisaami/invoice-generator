@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Invoice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100 flex flex-col items-center justify-center font-sans py-10">
+
+  <div class="bg-gray-800/70 backdrop-blur-lg shadow-xl rounded-2xl p-8 w-full max-w-2xl border border-gray-700">
+    <h1 class="text-3xl font-semibold text-indigo-400 mb-6 text-center">🧾 Create Invoice</h1>
+
+    <form method="POST" class="space-y-6">
+      {{ form.hidden_tag() }}
+
+      <div>
+        <label class="block font-medium mb-2 text-gray-300">{{ form.number.label }}</label>
+        {{ form.number(class_="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500") }}
+      </div>
+
+      <div>
+        <label class="block font-medium mb-2 text-gray-300">{{ form.title.label }}</label>
+        {{ form.title(class_="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500") }}
+      </div>
+
+      <div>
+        <label class="block font-medium mb-2 text-gray-300">{{ form.customer.label }}</label>
+        {{ form.customer(class_="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500") }}
+      </div>
+
+      <div>
+        <label class="block font-medium mb-2 text-gray-300">{{ form.description.label }}</label>
+        {{ form.description(class_="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500") }}
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">📦 Items</h2>
+          {{ form.entities.label(class_=" block font-medium mb-2 text-gray-300  ") }}
+            {{ form.entities(class_=" text-white w-full bg-gray-900 text-black border border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+
+      </div>
+
+      <div class="text-center">
+        {{ form.submit(class_="mt-6 w-full py-3 bg-indigo-500 hover:bg-indigo-600 rounded-lg font-semibold text-white transition") }}
+        <a href="{{ url_for('main_pages.index') }}"
+   class="mt-6 w-full py-3 bg-indigo-500 hover:bg-indigo-600 rounded-lg font-semibold text-white transition text-center block">
+   🏠 Back to Home
+</a>
+          
+      </div>
+    </form>
+  </div>
+
+  <footer class="mt-10 text-gray-500 text-sm">
+    © 2025 Invoice System
+  </footer>
+
+</body>
+</html>
